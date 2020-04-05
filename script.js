@@ -204,7 +204,8 @@ class Keyboard
    {
         window.addEventListener('keyup', (e) =>
         {
-            this.textArea.value += e.key;
+            e.key.length == 1 ? this.textArea.value += e.key : 0;
+            e.key == 'Backspace' ? this.textArea.value = this.textArea.value.substring(0, this.textArea.value.length-1) : 0;
         });
    }
    
