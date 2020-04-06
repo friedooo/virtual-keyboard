@@ -109,7 +109,7 @@ class Keyboard
 
    addClickEvent() 
    {
-    this.wrapper.addEventListener('click', click);
+    this.wrapper.addEventListener('mousedown', click);
     let textArea = this.textArea;
     function click(e)
     {
@@ -131,10 +131,13 @@ class Keyboard
             {
                 textArea.value += ' ';
             }
-
-            setTimeout(() => e.target.classList.remove('active-key'), 200);
          }
     }
+
+    this.wrapper.addEventListener('mouseup', (e)=> 
+    {
+        e.target.classList.remove('active-key');
+    });
    }
 
    checkLang()
@@ -170,11 +173,24 @@ class Keyboard
             {
             if (this.checkLang() == 'eng')
             this.fillKeysEngCaps();
-            else
+            else 
             this.fillKeysRusCaps();
             }
+            localStorage.setItem('lang', this.checkLang());
     }
     });
+   }
+
+   addTabEvent()
+   {
+       window.addEventListener('keydown', (e) => {
+        if (e.which == 17)
+        {
+            console.log(1);
+            e.preventDefault();
+            this.textArea.value += 1;
+        }
+       });
    }
    
 
@@ -195,6 +211,8 @@ class Keyboard
                 this.fillKeysEngCaps();
                 else
                 this.fillKeysEng();
+
+                localStorage.setItem('lang', this.checkLang());
             }
             pressed.clear();
         });
@@ -218,8 +236,15 @@ class Keyboard
                         {
                             if (e.key == this.wrapper.children[i].children[j].innerHTML)
                             {
+                                if (e.key == 'Meta')
+                                {
+                                    window.preventDefault();
+                                }
                                 this.wrapper.children[i].children[j].classList.add('active-key');
-                                setTimeout(() =>  this.wrapper.children[i].children[j].classList.remove('active-key'), 200);
+                                window.addEventListener('keyup', (e) => {
+                                this.wrapper.children[i].children[j].classList.remove('active-key')
+                                })
+                               
                             }
                         }
                      }
@@ -234,12 +259,35 @@ keyboard.createTextArea();
 keyboard.createWrapper();
 keyboard.createRows();
 keyboard.createKeys();
-keyboard.fillKeysEng();
+
+let lang = localStorage.getItem('lang');
+console.log(lang);
+
+if (lang == undefined | lang == 'eng')
+{
+    keyboard.fillKeysEng();
+}
+else if (lang == 'rus')
+{
+    keyboard.fillKeysRus();
+}
+else if (lang == 'eng!')
+{
+    keyboard.fillKeysEngCaps();
+}
+else if (lang == 'rus!')
+{
+    keyboard.fillKeysRusCaps();
+}
+
+
+
 keyboard.addClickEvent();
 keyboard.addKeyEvent();
 keyboard.switchLang();
 keyboard.addCapsEvent();
 keyboard.addStyleOnKeyDown();
+
 
 
 
