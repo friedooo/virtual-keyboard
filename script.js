@@ -208,6 +208,23 @@ class Keyboard
             e.key == 'Backspace' ? this.textArea.value = this.textArea.value.substring(0, this.textArea.value.length-1) : 0;
         });
    }
+
+   addStyleOnKeyDown()
+   {
+        window.addEventListener('keydown', (e) => {
+                    for (let i = 0; i < this.wrapper.children.length; i++)
+                    {
+                        for (let j = 0; j < this.wrapper.children[i].children.length; j++)
+                        {
+                            if (e.key == this.wrapper.children[i].children[j].innerHTML)
+                            {
+                                this.wrapper.children[i].children[j].classList.add('active-key');
+                                setTimeout(() =>  this.wrapper.children[i].children[j].classList.remove('active-key'), 200);
+                            }
+                        }
+                     }
+        });
+   }
    
    
 }
@@ -222,6 +239,7 @@ keyboard.addClickEvent();
 keyboard.addKeyEvent();
 keyboard.switchLang();
 keyboard.addCapsEvent();
+keyboard.addStyleOnKeyDown();
 
 
 
