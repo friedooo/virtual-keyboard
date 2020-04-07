@@ -24,6 +24,7 @@ class Keyboard
         this.field.appendChild(this.textArea);
         this.textArea.classList.add('wrapper');
         this.textArea.style.backgroundColor = 'white';
+        this.textArea.focus();
     }
 
     createRows()
@@ -131,7 +132,8 @@ class Keyboard
             {
                 textArea.value += ' ';
             }
-         }
+            
+        }
     }
 
     this.wrapper.addEventListener('mouseup', (e)=> 
@@ -178,19 +180,22 @@ class Keyboard
             }
             localStorage.setItem('lang', this.checkLang());
     }
+    this.textArea.focus();
     });
    }
 
    addTabEvent()
    {
        window.addEventListener('keydown', (e) => {
-        if (e.which == 17)
+        if (e.which == 9)
         {
-            console.log(1);
             e.preventDefault();
-            this.textArea.value += 1;
+            console.log(1);
+            this.textArea.value += 1; 
         }
-       });
+
+        this.textArea.focus();
+    });
    }
    
 
@@ -215,26 +220,31 @@ class Keyboard
                 localStorage.setItem('lang', this.checkLang());
             }
             pressed.clear();
+            this.textArea.focus();
         });
    }
 
-   addKeyEvent()
-   {
-        window.addEventListener('keyup', (e) =>
-        {
-            e.key.length == 1 ? this.textArea.value += e.key : 0;
-            e.key == 'Backspace' ? this.textArea.value = this.textArea.value.substring(0, this.textArea.value.length-1) : 0;
-        });
-   }
+//    addKeyEvent()
+//    {
+//         window.addEventListener('keyup', (e) =>
+//         {
+//             e.key.length == 1 ? this.textArea.value += e.key : 0;
+//             // e.key == 'Backspace' ? this.textArea.value = this.textArea.value.substring(0, this.textArea.value.length-1) : 0;
+//             this.textArea.focus();
+//         });
+//    }
 
    addStyleOnKeyDown()
    {
         window.addEventListener('keydown', (e) => {
+            let counter = 0;
                     for (let i = 0; i < this.wrapper.children.length; i++)
                     {
                         for (let j = 0; j < this.wrapper.children[i].children.length; j++)
                         {
-                            if (e.key == this.wrapper.children[i].children[j].innerHTML)
+                            if (e.key == this.wrapper.children[i].children[j].innerHTML ||
+                                 e.code == this.wrapper.children[i].children[j].innerHTML ||
+                                 (e.key == 'Control' && this.wrapper.children[i].children[j].innerHTML == 'Ctrl'))
                             {
                                 if (e.key == 'Meta')
                                 {
@@ -248,11 +258,24 @@ class Keyboard
                             }
                         }
                      }
+        
+                     this.textArea.focus();
         });
+   }
+
+   onTextArea()
+   {
+       window.addEventListener('change', () => this.textArea.focus());
+       window.addEventListener('click', () => this.textArea.focus());
+       window.addEventListener('blur', () => this.textArea.focus());
    }
    
    
 }
+
+let rule = document.createElement('div');
+rule.innerHTML = 'switch language = ctrl + shift </br> please check that language and caps lock status in page and in windows are the same';
+document.querySelector('body').appendChild(rule);
 
 let keyboard = new Keyboard('body');
 keyboard.createTextArea();
@@ -283,11 +306,11 @@ else if (lang == 'rus!')
 
 
 keyboard.addClickEvent();
-keyboard.addKeyEvent();
+// keyboard.addKeyEvent();
 keyboard.switchLang();
 keyboard.addCapsEvent();
 keyboard.addStyleOnKeyDown();
-
+keyboard.onTextArea();
 
 
 
