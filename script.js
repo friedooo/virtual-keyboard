@@ -235,6 +235,7 @@ class Keyboard
             this.fillKeysRusCaps();
             }
             localStorage.setItem('lang', this.checkLang());
+
     }
   
     });
@@ -311,6 +312,7 @@ class Keyboard
                 this.fillKeysEng();
 
                 localStorage.setItem('lang', this.checkLang());
+
             }
             pressed.clear();
             
@@ -432,21 +434,13 @@ keyboard.createKeys();
 let lang = localStorage.getItem('lang');
 console.log(lang);
 
-if (lang == undefined | lang == 'eng')
+if (lang == undefined || lang == 'eng' || lang == 'eng!')
 {
     keyboard.fillKeysEng();
 }
-else if (lang == 'rus')
+else if (lang == 'rus' || lang == 'rus!')
 {
     keyboard.fillKeysRus();
-}
-else if (lang == 'eng!')
-{
-    keyboard.fillKeysEngCaps();
-}
-else if (lang == 'rus!')
-{
-    keyboard.fillKeysRusCaps();
 }
 
 
