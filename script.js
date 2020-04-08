@@ -167,7 +167,7 @@ class Keyboard
 
             if (e.target.innerHTML == 'Shift')
             {
-                window.addEventListener('mousedown', () => {
+                    console.log(1);
                     if (this.checkLang() == 'eng')
                         this.fillKeysEngCaps();
                         else if (this.checkLang() == 'eng!')
@@ -176,24 +176,23 @@ class Keyboard
                         this.fillKeysRusCaps();
                         else if (this.checkLang() == 'rus!')
                         this.fillKeysRus();
-                });
-                window.addEventListener('mouseup', () => {
-                    if (this.checkLang() == 'eng')
-                        this.fillKeysEngCaps();
-                        else if (this.checkLang() == 'eng!')
-                        this.fillKeysEng();
-                        else if (this.checkLang() == 'rus')
-                        this.fillKeysRusCaps();
-                        else if (this.checkLang() == 'rus!')
-                        this.fillKeysRus();
-                });
         }
-            
         }
     });
 
     this.wrapper.addEventListener('mouseup', (e)=> 
     {
+        if (e.target.innerHTML == 'Shift')
+        {
+            if (this.checkLang() == 'eng')
+                        this.fillKeysEngCaps();
+                        else if (this.checkLang() == 'eng!')
+                        this.fillKeysEng();
+                        else if (this.checkLang() == 'rus')
+                        this.fillKeysRusCaps();
+                        else if (this.checkLang() == 'rus!')
+                        this.fillKeysRus();
+        }
         e.target.classList.remove('active-key');
     });
    }
@@ -406,8 +405,6 @@ class Keyboard
                             }
                         }
                      }
-        
-                  
         });
    }
 
