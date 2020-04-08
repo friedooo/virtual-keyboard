@@ -366,6 +366,10 @@ class Keyboard
                 e.preventDefault();
                 this.textArea.value += '   ';
             }
+            if (e.which == 18)
+            {
+                e.preventDefault();
+            }
         });
    }
 
@@ -376,13 +380,14 @@ class Keyboard
                     {
                         for (let j = 0; j < this.wrapper.children[i].children.length; j++)
                         {
+
                             if (this.key == this.wrapper.children[i].children[j].innerHTML ||
                                  e.key == this.wrapper.children[i].children[j].innerHTML ||
                                  (e.key == 'Control' && this.wrapper.children[i].children[j].innerHTML == 'Ctrl') ||
                                  (e.which == 32 && this.wrapper.children[i].children[j].innerHTML == 'Space'))
                             {
                                 this.wrapper.children[i].children[j].classList.add('active-key');
-                                window.addEventListener('keyup', (e) => {
+                                window.addEventListener('keyup', () => {
                                 this.wrapper.children[i].children[j].classList.remove('active-key')
                                 })
                                
