@@ -376,21 +376,34 @@ class Keyboard
    addStyleOnKeyDown()
    {
         window.addEventListener('keydown', (e) => {
+ 
                     for (let i = 0; i < this.wrapper.children.length; i++)
                     {
                         for (let j = 0; j < this.wrapper.children[i].children.length; j++)
                         {
-
-                            if (this.key == this.wrapper.children[i].children[j].innerHTML ||
+                           
+                            if ((this.key == this.wrapper.children[i].children[j].innerHTML && e.key.length == 1) ||
                                  e.key == this.wrapper.children[i].children[j].innerHTML ||
                                  (e.key == 'Control' && this.wrapper.children[i].children[j].innerHTML == 'Ctrl') ||
                                  (e.which == 32 && this.wrapper.children[i].children[j].innerHTML == 'Space'))
                             {
                                 this.wrapper.children[i].children[j].classList.add('active-key');
-                                window.addEventListener('keyup', () => {
-                                this.wrapper.children[i].children[j].classList.remove('active-key')
-                                })
-                               
+                                // window.addEventListener('keyup', () => {
+                                // this.wrapper.children[i].children[j].classList.remove('active-key')
+                                // })
+                                setTimeout(() => this.wrapper.children[i].children[j].classList.remove('active-key'), 200);
+                                
+                            }
+                            if ((e.which == 37 && this.wrapper.children[i].children[j].innerHTML == '←') ||
+                            (e.which == 38 && this.wrapper.children[i].children[j].innerHTML == '↑') ||
+                            (e.which == 39 && this.wrapper.children[i].children[j].innerHTML == '→') ||
+                            (e.which == 40 && this.wrapper.children[i].children[j].innerHTML == '↓'))
+                            {
+                                this.wrapper.children[i].children[j].classList.add('active-key');
+                                // window.addEventListener('keyup', () => {
+                                // this.wrapper.children[i].children[j].classList.remove('active-key')
+                                // })
+                                setTimeout(() => this.wrapper.children[i].children[j].classList.remove('active-key'), 200);
                             }
                         }
                      }
