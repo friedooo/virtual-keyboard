@@ -356,6 +356,11 @@ class Keyboard
                 }
             }
 
+            if (e.key.length != 1 || e.which == 32)
+            {
+                this.key = undefined;
+            }
+
             if (e.key.length == 1 && e.key != '←' && e.key != '↑' && e.key != '→' && e.key != '↓' && this.flag == true)
             {
             this.textArea.value = this.textArea.value = this.textArea.value.substring(0, this.textArea.value.length-1);
