@@ -338,21 +338,25 @@ class Keyboard
                 {
                     this.textArea.value += KEYS.ENG[i];
                     this.key = KEYS.ENG[i];
+                    break;
                 }
                 else if (e.which == KEYS.KEY_W[i] && e.key.length == 1 && this.checkLang() == 'eng!' && e.which != 32)
                 {
                     this.textArea.value += KEYS.ENG_CAPS[i];
                     this.key = KEYS.ENG_CAPS[i];
+                    break;
                 }
                 else if (e.which == KEYS.KEY_W[i] && e.key.length == 1 && this.checkLang() == 'rus' && e.which != 32)
                 {
                     this.textArea.value += KEYS.RUS[i];
                     this.key = KEYS.RUS[i];
+                    break;
                 }
                 else if (e.which == KEYS.KEY_W[i] && e.key.length == 1 && this.checkLang() == 'rus!' && e.which != 32)
                 {
                     this.textArea.value += KEYS.RUS_CAPS[i];
                     this.key = KEYS.RUS_CAPS[i];
+                    break;
                 }
             }
 
@@ -397,7 +401,7 @@ class Keyboard
                                 // this.wrapper.children[i].children[j].classList.remove('active-key')
                                 // })
                                 setTimeout(() => this.wrapper.children[i].children[j].classList.remove('active-key'), 200);
-                                
+                                break;
                             }
                             if ((e.which == 37 && this.wrapper.children[i].children[j].innerHTML == '←') ||
                             (e.which == 38 && this.wrapper.children[i].children[j].innerHTML == '↑') ||
@@ -409,6 +413,7 @@ class Keyboard
                                 // this.wrapper.children[i].children[j].classList.remove('active-key')
                                 // })
                                 setTimeout(() => this.wrapper.children[i].children[j].classList.remove('active-key'), 200);
+                                break;
                             }
                         }
                      }
