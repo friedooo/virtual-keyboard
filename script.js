@@ -240,21 +240,6 @@ class Keyboard
     });
    }
 
-   addTabEvent()
-   {
-       window.addEventListener('keydown', (e) => {
-        if (e.which == 9)
-        {
-            e.preventDefault();
-            console.log(1);
-            this.textArea.value += 1; 
-        }
-
-      
-    });
-   }
-
-
    addShiftEvent()
    {
     let shiftFlag = true;
@@ -387,16 +372,15 @@ class Keyboard
    addStyleOnKeyDown()
    {
         window.addEventListener('keydown', (e) => {
-            let counter = 0;
                     for (let i = 0; i < this.wrapper.children.length; i++)
                     {
                         for (let j = 0; j < this.wrapper.children[i].children.length; j++)
                         {
                             if (this.key == this.wrapper.children[i].children[j].innerHTML ||
                                  e.key == this.wrapper.children[i].children[j].innerHTML ||
-                                 (e.key == 'Control' && this.wrapper.children[i].children[j].innerHTML == 'Ctrl'))
+                                 (e.key == 'Control' && this.wrapper.children[i].children[j].innerHTML == 'Ctrl') ||
+                                 (e.which == 32 && this.wrapper.children[i].children[j].innerHTML == 'Space'))
                             {
-                                
                                 this.wrapper.children[i].children[j].classList.add('active-key');
                                 window.addEventListener('keyup', (e) => {
                                 this.wrapper.children[i].children[j].classList.remove('active-key')
