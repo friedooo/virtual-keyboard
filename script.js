@@ -389,11 +389,51 @@ class Keyboard
                     for (let i = 0; i < this.wrapper.children.length; i++)
                     {
                         for (let j = 0; j < this.wrapper.children[i].children.length; j++)
-                        {
-                           
+                        {   
+                            if (e.code == 'ShiftLeft')
+                            {                                  
+                                this.wrapper.children[3].children[0].classList.add('active-key');
+                                window.addEventListener('keyup', () => {
+                                this.wrapper.children[3].children[0].classList.remove('active-key')
+                                })                             
+                                return;
+                            }
+                            if (e.code == 'ShiftRight')
+                            {                                  
+                                this.wrapper.children[3].children[12].classList.add('active-key');
+                                window.addEventListener('keyup', () => {
+                                this.wrapper.children[3].children[12].classList.remove('active-key')
+                                })
+                                return;
+                            }
+                            if (e.code == 'ControlLeft')
+                            {                                  
+                                this.wrapper.children[4].children[0].classList.add('active-key');
+                                setTimeout(() => this.wrapper.children[4].children[0].classList.remove('active-key'), 200);
+                                return;
+                            }
+                            if (e.code == 'ControlRight')
+                            {                                  
+                                this.wrapper.children[4].children[8].classList.add('active-key');
+                                setTimeout(() => this.wrapper.children[4].children[8].classList.remove('active-key'), 200);
+                                return;
+                            }
+                            if (e.code == 'AltLeft')
+                            {                          
+                                this.wrapper.children[4].children[2].classList.add('active-key');
+                                setTimeout(() => this.wrapper.children[4].children[2].classList.remove('active-key'), 200);
+                                return;
+                            }
+                            if (e.key == 'AltGraph')
+                            {             
+                                this.wrapper.children[4].children[4].classList.add('active-key');
+                                this.wrapper.children[4].children[0].classList.remove('active-key')
+                                setTimeout(() => this.wrapper.children[4].children[4].classList.remove('active-key'), 200);
+                                return;
+                            }
+
                             if ((this.key == this.wrapper.children[i].children[j].innerHTML && e.key.length == 1) ||
                                  e.key == this.wrapper.children[i].children[j].innerHTML ||
-                                 (e.key == 'Control' && this.wrapper.children[i].children[j].innerHTML == 'Ctrl') ||
                                  (e.which == 32 && this.wrapper.children[i].children[j].innerHTML == 'Space'))
                             {
                                 this.wrapper.children[i].children[j].classList.add('active-key');
@@ -401,7 +441,7 @@ class Keyboard
                                 // this.wrapper.children[i].children[j].classList.remove('active-key')
                                 // })
                                 setTimeout(() => this.wrapper.children[i].children[j].classList.remove('active-key'), 200);
-                                break;
+                                return;
                             }
                             if ((e.which == 37 && this.wrapper.children[i].children[j].innerHTML == '←') ||
                             (e.which == 38 && this.wrapper.children[i].children[j].innerHTML == '↑') ||
@@ -413,7 +453,7 @@ class Keyboard
                                 // this.wrapper.children[i].children[j].classList.remove('active-key')
                                 // })
                                 setTimeout(() => this.wrapper.children[i].children[j].classList.remove('active-key'), 200);
-                                break;
+                                return;
                             }
                         }
                      }
@@ -426,7 +466,6 @@ class Keyboard
        window.addEventListener('click', () => this.textArea.focus());
        window.addEventListener('blur', () => this.textArea.focus());
    }
-   
    
 }
 
