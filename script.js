@@ -120,7 +120,8 @@ class Keyboard
    addClickEvent() 
    {
     this.wrapper.addEventListener('mousedown', (e) =>
-    {let textArea = this.textArea;
+    {
+
         if (e.target.parentNode.classList.contains('row1') ||
          e.target.parentNode.classList.contains('row2') ||
          e.target.parentNode.classList.contains('row3') ||
@@ -177,6 +178,13 @@ class Keyboard
                         else if (this.checkLang() == 'rus!')
                         this.fillKeysRus();
         }
+        }
+
+        if (e.target.innerHTML == 'Delete')
+        {
+            let textAreaArr = this.textArea.value.split('');
+            textAreaArr.splice(this.caretPosition,1);
+            this.textArea.value = textAreaArr.join('');
         }
     });
 
@@ -462,9 +470,10 @@ class Keyboard
 
    onTextArea()
    {
-       window.addEventListener('change', () => this.textArea.focus());
-       window.addEventListener('click', () => this.textArea.focus());
-       window.addEventListener('blur', () => this.textArea.focus());
+       this.textArea.addEventListener('click', () =>
+       {
+        this.caretPosition = this.textArea.selectionStart;
+       });
    }
    
 }
@@ -499,7 +508,7 @@ keyboard.switchLang();
 keyboard.addCapsEvent();
 keyboard.addStyleOnKeyDown();
 keyboard.addShiftEvent();
-// keyboard.onTextArea();
+keyboard.onTextArea();
 
 
 
