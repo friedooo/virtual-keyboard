@@ -131,19 +131,19 @@ class Keyboard
             e.target.classList.add('active-key');
             e.target.innerHTML.length == 1
             ? 
-            textArea.value += e.target.innerHTML : 1;
+            this.textArea.value += e.target.innerHTML : 1;
 
             if (e.target.innerHTML == 'Space')
             {
-                textArea.value += ' ';
+                this.textArea.value += ' ';
             }
             if (e.target.innerHTML == 'Tab')
             {
-                textArea.value += '   ';
+                this.textArea.value += '   ';
             }
             if (e.target.innerHTML == 'Backspace')
             {
-                textArea.value = textArea.value.substring(0, textArea.value.length-1)
+                this.textArea.value = this.textArea.value.substring(0, this.textArea.value.length-1)
             }
             
             
