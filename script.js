@@ -1,5 +1,5 @@
-
-import KEYS from './src/keys';
+/* eslint-disable import/extensions */
+import KEYS from './src/keys.js';
 
 class Keyboard {
   constructor(selector) {
